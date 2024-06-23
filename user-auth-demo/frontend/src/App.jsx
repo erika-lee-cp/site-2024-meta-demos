@@ -14,7 +14,33 @@ function App() {
     setPassword(e.target.value);
   }
 
-  const handleClick = () => {
+  const handleCreate = () => {
+    fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user,
+          password,
+        }), 
+      })
+      .then(response => {
+        console.log(response)
+        if (response.ok) {
+          setResult("create success!");
+        }
+        else {
+          setResult("failed to create!");
+        }
+      })
+      .catch(error => {
+        setResult("failed to create!");
+      });
+  }
+
+  const handleLogin = () => {
     fetch(`${import.meta.env.VITE_BACKEND_ADDRESS}/login`,
       {
         method: "POST",
@@ -28,7 +54,7 @@ function App() {
       })
       .then(response => {
         if (response.ok) {
-          setResult("success!");
+          setResult("login success!");
         }
         else {
           setResult("failed to login!");
@@ -45,7 +71,8 @@ function App() {
       <input onChange={handleChangeUser} value={user}></input>
       <label>password:</label>
       <input onChange={handleChangePassword} value={password}></input>
-      <button onClick={handleClick}>Login</button>
+      <button onClick={handleCreate}>Create</button>
+      <button onClick={handleLogin}>Login</button>
       { result && <p>{result}</p>}
     </div>
   )
