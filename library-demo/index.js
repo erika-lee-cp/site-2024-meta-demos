@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.get("/books", async (req, res) => {
     const books = await prisma.book.findMany();
-    res.json(books)
+    res.status(202).json(books)
 })
 
 
