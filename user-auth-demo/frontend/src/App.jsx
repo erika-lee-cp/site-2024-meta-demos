@@ -66,14 +66,20 @@ function App() {
   }
 
   return (
-    <div>       
-      <label>user:</label>
-      <input onChange={handleChangeUser} value={user}></input>
-      <label>password:</label>
-      <input onChange={handleChangePassword} value={password}></input>
+    <div>
+      <div>       
+        <label>user:</label>
+        <input onChange={handleChangeUser} value={user}></input>
+      </div>
+      <div>
+        <label>password:</label>
+        <input onChange={handleChangePassword} value={password}></input>
+      </div>
       <button onClick={handleCreate}>Create</button>
       <button onClick={handleLogin}>Login</button>
-      { result && <p>{result}</p>}
+      <div>
+        { result && <p>{result}</p>}
+      </div>
     </div>
   )
 }
